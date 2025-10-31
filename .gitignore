@@ -3,5 +3,4 @@ dist/
 coverage/
 .nyc_output/
 *.tsbuildinfo
-package-lock.json
 
