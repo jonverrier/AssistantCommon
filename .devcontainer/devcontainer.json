@@ -1,0 +1,24 @@
+{
+  "name": "StrongAI Assistant - Common Library",
+  // For monorepo: use relative path (if AssistantBuild is in same repo)
+  "extends": "https://raw.githubusercontent.com/jonverrier/AssistantBuild/main/.devcontainer/devcontainer.json",
+  
+  // Override workspace folder to point to this package
+  "workspaceFolder": "/workspace/AssistantCommon",
+  
+  // Package-specific VS Code extensions
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Add any AssistantCommon-specific extensions here
+      ],
+      "settings": {
+        // Package-specific settings can override base settings
+      }
+    }
+  },
+  
+  // Package-specific post-create commands
+  "postCreateCommand": "cd /workspace/AssistantCommon && npm install"
+}
+
