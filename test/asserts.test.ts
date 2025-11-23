@@ -9,10 +9,11 @@
 
 import { expect } from 'expect';
 import { describe, it } from 'mocha';
-import { 
-  InvalidParameterError, 
-  InvalidOperationError, 
-  ConnectionError, 
+import {
+  LoggedError,
+  InvalidParameterError,
+  InvalidOperationError,
+  ConnectionError,
   InvalidStateError,
   throwIfUndefined,
   throwIfNull,
@@ -20,12 +21,52 @@ import {
 } from '../src/Asserts';
 
 describe('Asserts', () => {
+  describe('LoggedError', () => {
+    it('should create error with default message and log creation', () => {
+      const originalConsoleError = console.error;
+      const logs: string[] = [];
+      console.error = (...args: unknown[]) => {
+        logs.push(args.map(String).join(' '));
+      };
+
+      const error = new LoggedError();
+
+      console.error = originalConsoleError;
+
+      expect(error).toBeInstanceOf(Error);
+      expect(error).toBeInstanceOf(LoggedError);
+      expect(error.name).toBe('LoggedError');
+      expect(error.message).toBe('');
+      expect(logs.some(log => log.includes('[ERROR CREATED] LoggedError: '))).toBe(true);
+      expect(logs.some(log => log.includes('LoggedError'))).toBe(true);
+    });
+
+    it('should capture stack trace before logging', () => {
+      const originalConsoleError = console.error;
+      let loggedStack = '';
+      console.error = (message?: unknown) => {
+        const maybeString = typeof message === 'string' ? message : String(message ?? '');
+        if (maybeString.includes('LoggedError')) {
+          loggedStack = maybeString;
+        }
+      };
+
+      const error = new LoggedError('capture stack');
+
+      console.error = originalConsoleError;
+
+      expect(error.stack).toBeDefined();
+      expect(loggedStack).toContain('LoggedError');
+    });
+  });
+
   describe('Custom Error Classes', () => {
     describe('InvalidParameterError', () => {
       it('should create error with default message', () => {
         const error = new InvalidParameterError();
-        
+
         expect(error).toBeInstanceOf(Error);
+        expect(error).toBeInstanceOf(LoggedError);
         expect(error).toBeInstanceOf(InvalidParameterError);
         expect(error.name).toBe('InvalidParameterError');
         expect(error.message).toBe('');
@@ -34,8 +75,9 @@ describe('Asserts', () => {
       it('should create error with custom message', () => {
         const message = 'Parameter x must be positive';
         const error = new InvalidParameterError(message);
-        
+
         expect(error).toBeInstanceOf(Error);
+        expect(error).toBeInstanceOf(LoggedError);
         expect(error).toBeInstanceOf(InvalidParameterError);
         expect(error.name).toBe('InvalidParameterError');
         expect(error.message).toBe(message);
@@ -72,8 +114,9 @@ describe('Asserts', () => {
     describe('InvalidOperationError', () => {
       it('should create error with default message', () => {
         const error = new InvalidOperationError();
-        
+
         expect(error).toBeInstanceOf(Error);
+        expect(error).toBeInstanceOf(LoggedError);
         expect(error).toBeInstanceOf(InvalidOperationError);
         expect(error.name).toBe('InvalidOperationError');
         expect(error.message).toBe('');
@@ -82,8 +125,9 @@ describe('Asserts', () => {
       it('should create error with custom message', () => {
         const message = 'Cannot perform operation in current state';
         const error = new InvalidOperationError(message);
-        
+
         expect(error).toBeInstanceOf(Error);
+        expect(error).toBeInstanceOf(LoggedError);
         expect(error).toBeInstanceOf(InvalidOperationError);
         expect(error.name).toBe('InvalidOperationError');
         expect(error.message).toBe(message);
@@ -113,8 +157,9 @@ describe('Asserts', () => {
     describe('ConnectionError', () => {
       it('should create error with default message', () => {
         const error = new ConnectionError();
-        
+
         expect(error).toBeInstanceOf(Error);
+        expect(error).toBeInstanceOf(LoggedError);
         expect(error).toBeInstanceOf(ConnectionError);
         expect(error.name).toBe('ConnectionError');
         expect(error.message).toBe('');
@@ -123,8 +168,9 @@ describe('Asserts', () => {
       it('should create error with custom message', () => {
         const message = 'Failed to connect to database';
         const error = new ConnectionError(message);
-        
+
         expect(error).toBeInstanceOf(Error);
+        expect(error).toBeInstanceOf(LoggedError);
         expect(error).toBeInstanceOf(ConnectionError);
         expect(error.name).toBe('ConnectionError');
         expect(error.message).toBe(message);
@@ -154,8 +200,9 @@ describe('Asserts', () => {
     describe('InvalidStateError', () => {
       it('should create error with default message', () => {
         const error = new InvalidStateError();
-        
+
         expect(error).toBeInstanceOf(Error);
+        expect(error).toBeInstanceOf(LoggedError);
         expect(error).toBeInstanceOf(InvalidStateError);
         expect(error.name).toBe('InvalidStateError');
         expect(error.message).toBe('');
@@ -164,8 +211,9 @@ describe('Asserts', () => {
       it('should create error with custom message', () => {
         const message = 'Object is in invalid state for this operation';
         const error = new InvalidStateError(message);
-        
+
         expect(error).toBeInstanceOf(Error);
+        expect(error).toBeInstanceOf(LoggedError);
         expect(error).toBeInstanceOf(InvalidStateError);
         expect(error.name).toBe('InvalidStateError');
         expect(error.message).toBe(message);
@@ -442,6 +490,7 @@ describe('Asserts', () => {
 
       errors.forEach(error => {
         expect(error instanceof Error).toBe(true);
+        expect(error instanceof LoggedError).toBe(true);
         expect(error.constructor.name).toBe(error.name);
       });
     });
