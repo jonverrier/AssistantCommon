@@ -11,14 +11,34 @@
 // Copyright (c) 2025 Jon Verrier
 
 /**
+ * Represents a logged error base class that records when errors are created.
+ * @param {string} message - The error message describing the problem.
+ */
+export class LoggedError extends Error {
+   constructor(message: string = '') {
+      super(message);
+
+      // see: typescriptlang.org/docs/handbook/release-notes/typescript-2-2.html
+      Object.setPrototypeOf(this, new.target.prototype); // restore prototype chain
+      this.name = new.target.name; // stack traces display correctly now
+
+      // Important: capture stack before we log
+      if ((Error as any).captureStackTrace) {
+         Error.captureStackTrace(this, this.constructor);
+      }
+
+      console.error(`[ERROR CREATED] ${this.name}: ${this.message}`);
+      console.error(this.stack);
+   }
+}
+
+/**
  * Represents an error thrown when an invalid parameter is encountered.
  * @param {string} message - The error message describing the invalid parameter.
  */
-export class InvalidParameterError extends Error {
+export class InvalidParameterError extends LoggedError {
    constructor(message?: string) {
       super(message);
-      // see: typescriptlang.org/docs/handbook/release-notes/typescript-2-2.html
-      Object.setPrototypeOf(this, new.target.prototype); // restore prototype chain
       this.name = InvalidParameterError.name; // stack traces display correctly now
    }
 }
@@ -27,11 +47,9 @@ export class InvalidParameterError extends Error {
  * Represents an error thrown when an invalid operation is attempted.
  * @param {string} message - The error message describing the invalid operation.
  */
-export class InvalidOperationError extends Error {
+export class InvalidOperationError extends LoggedError {
    constructor(message?: string) {
       super(message);
-      // see: typescriptlang.org/docs/handbook/release-notes/typescript-2-2.html
-      Object.setPrototypeOf(this, new.target.prototype); // restore prototype chain
       this.name = InvalidOperationError.name; // stack traces display correctly now
    }
 }
@@ -40,11 +58,9 @@ export class InvalidOperationError extends Error {
  * Represents an error thrown when a connection operation fails.
  * @param {string} message - The error message describing the connection failure.
  */
-export class ConnectionError extends Error {
+export class ConnectionError extends LoggedError {
    constructor(message?: string) {
       super(message);
-      // see: typescriptlang.org/docs/handbook/release-notes/typescript-2-2.html
-      Object.setPrototypeOf(this, new.target.prototype); // restore prototype chain
       this.name = ConnectionError.name; // stack traces display correctly now
    }
 }
@@ -53,11 +69,9 @@ export class ConnectionError extends Error {
  * Represents an error thrown when an object is in an invalid state for the requested operation.
  * @param {string} message - The error message describing the invalid state.
  */
-export class InvalidStateError extends Error {
+export class InvalidStateError extends LoggedError {
    constructor(message?: string) {
       super(message);
-      // see: typescriptlang.org/docs/handbook/release-notes/typescript-2-2.html
-      Object.setPrototypeOf(this, new.target.prototype); // restore prototype chain
       this.name = InvalidStateError.name; // stack traces display correctly now
    }
 }

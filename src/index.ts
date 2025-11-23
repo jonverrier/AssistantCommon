@@ -11,6 +11,7 @@ export {
    throwIfUndefined,
    throwIfNull,
    throwIfFalse,
+   LoggedError,
    InvalidParameterError,
    InvalidOperationError,
    ConnectionError,
