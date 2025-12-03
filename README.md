@@ -1,10 +1,12 @@
 # AssistantCommon
 
-Common utilities for the StrongAI Assistant project, including assertion functions, custom error classes, and string sanitization utilities.
+Foundation package for the StrongAI Assistant platform. Part of the [StrongAI Gym Assistant](../README.md) suite.
 
 ## Overview
 
-AssistantCommon provides reusable utilities extracted from the PromptRepository package to avoid duplication across multiple packages in the StrongAI monorepo.
+AssistantCommon is the **base package** in the StrongAI dependency hierarchy, providing common utilities used throughout the platform. It has zero external dependencies on other StrongAI packages, making it the foundational layer that all other packages build upon.
+
+This package provides assertion functions, custom error classes, and string sanitization utilities extracted to avoid duplication across the monorepo.
 
 ## Features
 
