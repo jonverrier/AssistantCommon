@@ -1,6 +1,6 @@
 {
   "name": "@jonverrier/assistant-common",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Common utilities for the StrongAI Assistant project including assertion functions, custom error classes, and string sanitization",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
