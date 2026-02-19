@@ -3,7 +3,7 @@
  * 
  * Sanitization functions for input and output strings.
  */
-// Copyright (c) 2025 Jon Verrier
+// Copyright (c) 2025, 2026 Jon Verrier
 
 // ===Start StrongAI Generated Comment (20260219)===
 // This module provides simple, safe string sanitization for inputs and outputs. It helps prevent control characters and HTML injection from user-provided text, and scrubs sensitive data before logging or displaying it.

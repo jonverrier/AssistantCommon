@@ -5,7 +5,7 @@
  * custom error classes, and string sanitization utilities.
  */
 
-// Copyright (c) 2025 Jon Verrier
+// Copyright (c) 2025, 2026 Jon Verrier
 
 // ===Start StrongAI Generated Comment (20260219)===
 // AssistantCommon centralizes common utilities for the StrongAI Assistant codebase. It exposes assertion helpers, domain-specific error types, and string sanitizers so other modules can depend on a single, consistent source.
