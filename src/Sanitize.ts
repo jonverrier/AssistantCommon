@@ -5,6 +5,16 @@
  */
 // Copyright (c) 2025 Jon Verrier
 
+// ===Start StrongAI Generated Comment (20260219)===
+// This module provides simple, safe string sanitization for inputs and outputs. It helps prevent control characters and HTML injection from user-provided text, and scrubs sensitive data before logging or displaying it.
+// 
+// sanitizeInputString accepts a string, null, or undefined and returns a sanitized string. It returns an empty string for nullish or falsy input. It removes ASCII control characters, strips HTML tags using a loose tag pattern, and trims surrounding whitespace. Use this for cleaning raw user input fields.
+// 
+// sanitizeOutputString targets display or logging scenarios. It accepts a string and an optional preserveLineFeeds flag (default false). When true, it keeps line feeds, carriage returns, and tabs while removing other control characters; otherwise it removes all control characters. It strips HTML tags, replaces email addresses (including cases where the @ is escaped) with [EMAIL], masks continuous 16–19 digit sequences as [CARD], and replaces multiple phone number formats (US numbers with optional country code and extensions, and common UK-style spaced formats) with [PHONE]. The result is trimmed.
+// 
+// There are no external imports. All functionality relies on in-module regular expressions.
+// ===End StrongAI Generated Comment===
+
 /**
  * Sanitizes a string input by removing potentially dangerous characters
  * @param input The string to sanitize
