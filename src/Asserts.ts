@@ -10,6 +10,18 @@
 
 // Copyright (c) 2025 Jon Verrier
 
+// ===Start StrongAI Generated Comment (20260219)===
+// This module provides small, type-safe runtime assertions and a set of error classes that automatically log when they are created. Use it to enforce invariants at runtime while enabling TypeScript to narrow types based on the checks.
+// 
+// LoggedError extends Error and standardizes error behavior. It restores the prototype chain, sets the name for accurate stack traces, attempts to capture a V8-style stack with Error.captureStackTrace when available, and logs the error name, message, and stack to the console at construction time.
+// 
+// InvalidParameterError, InvalidOperationError, ConnectionError, and InvalidStateError extend LoggedError. They specialize the error category by setting a specific name, but otherwise inherit the logging and stack behavior.
+// 
+// throwIfUndefined narrows a value by throwing a ReferenceError when the value is undefined. throwIfNull narrows a value by throwing a ReferenceError when the value is null. throwIfFalse asserts a boolean condition by throwing a ReferenceError when the value is false. All three functions use TypeScript’s asserts signatures to inform the type checker.
+// 
+// No external imports are used; the module relies on built-in Error and console.
+// ===End StrongAI Generated Comment===
+
 /**
  * Represents a logged error base class that records when errors are created.
  * @param {string} message - The error message describing the problem.
