@@ -8,7 +8,7 @@
  * @module Asserts
  */
 
-// Copyright (c) 2025 Jon Verrier
+// Copyright (c) 2025, 2026 Jon Verrier
 
 // ===Start StrongAI Generated Comment (20260219)===
 // This module provides small, type-safe runtime assertions and a set of error classes that automatically log when they are created. Use it to enforce invariants at runtime while enabling TypeScript to narrow types based on the checks.

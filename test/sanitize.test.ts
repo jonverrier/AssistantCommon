@@ -4,7 +4,7 @@
  * Unit tests for the Sanitize module which handles input/output string sanitization.
  */
 
-// Copyright (c) 2025 Jon Verrier
+// Copyright (c) 2025, 2026 Jon Verrier
 
 import { expect } from 'expect';
 import { describe, it } from 'mocha';
