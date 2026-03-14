@@ -1,6 +1,10 @@
 # AssistantCommon
 
-Foundation package for the StrongAI Assistant platform. Part of the [StrongAI Gym Assistant](../README.md) suite.
+Foundation package for the StrongAI Assistant platform.
+
+## What is StrongAI?
+
+StrongAI is a brand and a belief — a belief that AI can transform the way people get fit. StrongAI helps community and performance gyms deliver differentiated experiences through AI-powered coaching and assistant tools. This repository holds the shared runtime utilities (guards, errors, sanitizers) used across all StrongAI packages — both public and private — to avoid duplication and ensure consistency.
 
 ## Overview
 
@@ -20,7 +24,7 @@ Type-safe assertion utilities that provide TypeScript type narrowing:
 
 ### Custom Error Classes
 
-Standardized error classes for better error handling:
+Standardized error classes for better error handling. **Note:** All error classes log immediately to `console.error` at construction time — even when the error is later caught. This is intentional: it ensures every error is recorded at the point of origin for easier diagnosis.
 
 - `InvalidParameterError`: Thrown when an invalid parameter is encountered
 - `InvalidOperationError`: Thrown when an invalid operation is attempted
@@ -29,10 +33,17 @@ Standardized error classes for better error handling:
 
 ### String Sanitization
 
-Security-focused string sanitization functions:
+Security-focused string sanitization functions. There are two distinct functions for two distinct use cases:
 
-- `sanitizeInputString(input: string | null | undefined)`: Removes control characters and HTML tags from input strings
-- `sanitizeOutputString(input: string | null | undefined, preserveLineFeeds?: boolean)`: Comprehensive sanitization including sensitive data removal (emails, credit cards, phone numbers)
+- `sanitizeInputString(input: string | null | undefined)`: Use this for text **before processing** — removes control characters and HTML tags (structural hazards) but preserves content including PII, since the data stays internal.
+- `sanitizeOutputString(input: string | null | undefined, preserveLineFeeds?: boolean)`: Use this for text **going to logs or external systems** — does everything `sanitizeInputString` does, plus masks PII (emails, credit cards, phone numbers) to prevent accidental leakage.
+
+## Architecture
+
+This package sits at the base of the StrongAI dependency hierarchy. Two C4 diagrams describe its place in the wider system:
+
+- [System Context diagram](src/README.StrongAI.Context.md) — shows how AssistantCommon relates to the overall StrongAI platform and its consumers
+- [Component diagram](src/README.StrongAI.Component.md) — shows the internal structure of the package
 
 ## Installation
 

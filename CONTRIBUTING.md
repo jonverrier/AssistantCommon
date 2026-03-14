@@ -81,7 +81,7 @@ Thank you for your interest in contributing to AssistantCommon!
 
 1. Ensure all tests pass
 2. Update documentation if needed
-3. Create a pull request targeting the `main` branch
+3. Create a pull request targeting the `develop` branch
 4. The CI workflow will automatically run tests
 
 ### Publishing
