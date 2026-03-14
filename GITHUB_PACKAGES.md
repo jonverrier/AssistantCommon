@@ -11,7 +11,7 @@ The package is configured in `package.json`:
 ```json
 {
   "name": "@jonverrier/assistant-common",
-  "version": "0.1.0",
+  "version": "0.2.5",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
@@ -57,7 +57,7 @@ Or add to your `package.json`:
 ```json
 {
   "dependencies": {
-    "@jonverrier/assistant-common": "^0.1.0"
+    "@jonverrier/assistant-common": "^0.2.5"
   }
 }
 ```
@@ -138,7 +138,7 @@ PromptRepository depends on AssistantCommon:
 ```json
 {
   "dependencies": {
-    "@jonverrier/assistant-common": "^0.1.0"
+    "@jonverrier/assistant-common": "^0.2.5"
   }
 }
 ```
