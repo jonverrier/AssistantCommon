@@ -28,7 +28,7 @@
     "watch": "tsc -b -w",
     "clean": "rimraf dist",
     "test": "mocha --require ts-node/register --extensions ts,js test/**/*.test.ts --exit",
-    "test:ci": "mocha --require ts-node/register --extensions ts,js test/asserts.test.ts test/sanitize.test.ts --exit",
+    "test:ci": "mocha --require ts-node/register --extensions ts,js test/asserts.test.ts test/sanitize.test.ts test/dateFormat.test.ts --exit",
     "cover": "nyc --reporter=html --reporter=text --reporter=lcov --extension .ts --exclude \"**/*.test.ts\" --exclude \"test/**\" npm run test",
     "cover:json": "nyc --reporter=json --report-dir=.nyc_output --extension .ts --exclude \"**/*.test.ts\" --exclude \"test/**\" npm run test"
   },

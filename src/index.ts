@@ -16,7 +16,9 @@
 // 
 // sanitizeInputString cleans inbound text to prevent unsafe or malformed content from entering the system. sanitizeOutputString prepares text for display or transmission, removing or escaping problematic characters.
 // 
-// This module re-exports its functionality from two internal dependencies: ./Asserts for the assertion helpers and error classes, and ./Sanitize for the input and output string sanitizers.
+// DateFormat centralizes ISO calendar storage strings, en-GB compact and long display formatting, strict parse for stored values, and legacy-to-ISO parsing for migrations and ingest.
+// 
+// This module re-exports its functionality from internal modules: ./Asserts, ./Sanitize, and ./DateFormat.
 // ===End StrongAI Generated Comment===
 
 export {
@@ -34,4 +36,12 @@ export {
    sanitizeInputString,
    sanitizeOutputString
 } from './Sanitize';
+
+export {
+   formatDateForStorage,
+   formatDateForUserCompact,
+   formatDateForUserLong,
+   parseStoredDate,
+   parseUserDateToStorageDate
+} from './DateFormat';
 
