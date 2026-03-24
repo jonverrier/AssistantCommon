@@ -101,9 +101,9 @@ describe('DateFormat', () => {
    });
 
    describe('formatDateForUserCompact and formatDateForUserLong', () => {
-      it('formats compact en-GB with two-digit year', () => {
+      it('formats compact en-GB with weekday abbreviation and two-digit year', () => {
          const s = formatDateForUserCompact('2025-06-15');
-         expect(s).toMatch(/15\s+Jun\s+25/);
+         expect(s).toMatch(/Sun\s+15\s+Jun\s+25/);
       });
 
       it('formats long en-GB with weekday and full month', () => {
@@ -114,7 +114,7 @@ describe('DateFormat', () => {
 
       it('accepts Date input', () => {
          const d = new Date(2025, 10, 3, 12, 0, 0);
-         expect(formatDateForUserCompact(d)).toMatch(/03\s+Nov\s+25/);
+         expect(formatDateForUserCompact(d)).toMatch(/Mon\s+03\s+Nov\s+25/);
          expect(formatDateForUserLong(d)).toMatch(/Monday/);
       });
    });

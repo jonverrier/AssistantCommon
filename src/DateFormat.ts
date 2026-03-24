@@ -1,6 +1,6 @@
 /**
  * @module DateFormat
- * Shared date parsing and formatting: storage as ISO `YYYY-MM-DD`, compact UI (`dd MMM yy` en-GB),
+ * Shared date parsing and formatting: storage as ISO `YYYY-MM-DD`, compact UI (`ddd dd MMM yy` en-GB, e.g. Mon 16 Mar 26),
  * and long en-GB strings for MCP / query context. Parsing accepts common legacy shapes used across StrongAI.
  */
 // Copyright (c) 2025, 2026 Jon Verrier
@@ -317,13 +317,20 @@ export function formatDateForStorage(date: Date | string): string {
 }
 
 /**
- * Short human-readable format for web/UI (en-GB `dd MMM yy`, two-digit year).
+ * Short human-readable format for web/UI (en-GB weekday abbreviation + `dd MMM yy`, e.g. Mon 16 Mar 26).
+ * Built from separate `toLocaleDateString` calls so en-GB does not insert a comma after the weekday.
  * @param date - `Date` or parseable string
  */
 export function formatDateForUserCompact(date: Date | string): string {
    const { year, month, day } = coerceToCalendarDate(date);
    const d = new Date(year, month - 1, day, 12, 0, 0, 0);
-   return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' });
+   const weekday = d.toLocaleDateString('en-GB', { weekday: 'short' });
+   const rest = d.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: '2-digit'
+   });
+   return `${weekday} ${rest}`;
 }
 
 /**
