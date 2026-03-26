@@ -1,5 +1,5 @@
-# AssistantCommon Cursor Rules
-<!-- This file contains instructions for AI coding assistants (e.g. Cursor, Claude Code) working in this repo. It is not part of the package's domain documentation. -->
+# AssistantCommon Agent Notes
+<!-- This file contains package-specific instructions for coding agents working in this repo. It is not part of the package's domain documentation. -->
 
 > **Policy inheritance:** This package follows the global StrongAI standards in `../AGENTS.md`. Use this file to highlight expectations unique to the foundational library.
 
