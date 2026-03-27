@@ -9,6 +9,7 @@
 - Design APIs so they run in any Node.js environment (no browser-specific globals) and can be bundled elsewhere without shimming.
 
 ## Implementation Guidance
+- **Dates**: Changes to parsing or display rules belong in `src/DateFormat.ts` and must ship with **`test/dateFormat.test.ts`** coverage. Follow the platform policy in `../AGENTS.md` (Common Utilities → Date/Time): storage is ISO `YYYY-MM-DD`; user-facing formatters are en-GB (`formatDateForUserCompact`, `formatDateForUserLong`, `formatDateForStorage`, `parseStoredDate`). Document notable behavior in `README.md` when you add or change public exports.
 - Export everything through `src/index.ts`; treat it as the single barrel for consumers.
 - When adding an error class, document sanitized message patterns and include helper methods for redaction.
 - Utilities must expose pure, side-effect-free functions unless they intentionally wrap logging; provide configuration hooks for sinks/levels.

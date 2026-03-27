@@ -10,7 +10,7 @@ StrongAI is a brand and a belief — a belief that AI can transform the way peop
 
 AssistantCommon is the **base package** in the StrongAI dependency hierarchy, providing common utilities used throughout the platform. It has zero external dependencies on other StrongAI packages, making it the foundational layer that all other packages build upon.
 
-This package provides assertion functions, custom error classes, and string sanitization utilities extracted to avoid duplication across the monorepo.
+This package provides assertion functions, custom error classes, string sanitization utilities, and **shared calendar date parsing/formatting** (`DateFormat`) so storage and UI stay consistent across the monorepo.
 
 ## Features
 
@@ -37,6 +37,19 @@ Security-focused string sanitization functions. There are two distinct functions
 
 - `sanitizeInputString(input: string | null | undefined)`: Use this for text **before processing** — removes control characters and HTML tags (structural hazards) but preserves content including PII, since the data stays internal.
 - `sanitizeOutputString(input: string | null | undefined, preserveLineFeeds?: boolean)`: Use this for text **going to logs or external systems** — does everything `sanitizeInputString` does, plus masks PII (emails, credit cards, phone numbers) to prevent accidental leakage.
+
+### Dates (storage & display)
+
+StrongAI treats **calendar dates** as **ISO date-only `YYYY-MM-DD`** in persistence and APIs. Human-readable formatting is **en-GB** everywhere product-facing (aligned with the web app and MCP).
+
+| Use case | API (import from package root) |
+|----------|----------------------------------|
+| Normalize user/legacy input → storage | `formatDateForStorage(value)` |
+| Strict ISO → `Date` (local calendar day, noon) | `parseStoredDate(iso)` |
+| Short UI label (`ddd dd MMM yy`) | `formatDateForUserCompact(date \| string)` |
+| Long UI / context (`weekday, day month year`) | `formatDateForUserLong(date \| string)` |
+
+Implementation and edge cases (legacy English strings, slash dates, etc.) live in **`src/DateFormat.ts`**. Regression tests are in **`test/dateFormat.test.ts`**. Platform-wide policy is summarized in the parent **`StrongAI/AGENTS.md`** (Common Utilities → Date/Time).
 
 ## Architecture
 
@@ -77,7 +90,9 @@ import {
   throwIfNull,
   InvalidParameterError,
   sanitizeInputString,
-  sanitizeOutputString
+  sanitizeOutputString,
+  formatDateForStorage,
+  formatDateForUserCompact
 } from '@jonverrier/assistant-common';
 
 // Assertion functions
@@ -93,6 +108,10 @@ if (invalidCondition) {
 // String sanitization
 const cleanInput = sanitizeInputString(userInput);
 const safeOutput = sanitizeOutputString(logData);
+
+// Calendar dates (see "Dates (storage & display)" above)
+const stored = formatDateForStorage(someDateOrString);
+const label = formatDateForUserCompact(stored);
 ```
 
 ## Development
