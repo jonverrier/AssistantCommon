@@ -14,11 +14,11 @@
 // 
 // LoggedError represents an error that can carry logging context. InvalidParameterError signals bad caller input. InvalidOperationError indicates an action that is not valid in the current context. ConnectionError captures transport or service connectivity failures. InvalidStateError reports an unexpected or illegal internal state. These typed errors support clearer control flow and better diagnostics.
 // 
-// sanitizeInputString cleans inbound text to prevent unsafe or malformed content from entering the system. sanitizeOutputString prepares text for display or transmission, removing or escaping problematic characters.
+// sanitizeInputString cleans inbound text to prevent unsafe or malformed content from entering the system. sanitizeOutputString prepares text for display or transmission, removing or escaping problematic characters. redactSensitivePayloadForApiLog removes bearer tokens and similar secrets from structured API payloads before logging.
 // 
 // DateFormat centralizes ISO calendar storage strings, en-GB compact (weekday + date) and long display formatting, strict parse for stored values, and legacy-to-ISO parsing for migrations and ingest.
 // 
-// This module re-exports its functionality from internal modules: ./Asserts, ./Sanitize, and ./DateFormat.
+// This module re-exports its functionality from internal modules: ./Asserts, ./Sanitize, ./SanitizeApiPayload, and ./DateFormat.
 // ===End StrongAI Generated Comment===
 
 export {
@@ -36,6 +36,8 @@ export {
    sanitizeInputString,
    sanitizeOutputString
 } from './Sanitize';
+
+export { REDACTED_LOG_PLACEHOLDER, redactSensitivePayloadForApiLog } from './SanitizeApiPayload';
 
 export {
    formatDateForStorage,
