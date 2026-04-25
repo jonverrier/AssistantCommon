@@ -102,7 +102,7 @@ npm publish
 ## Branch Strategy
 
 - **main**: Production-ready code, always unlinked, uses GitHub Packages
-- **develop** / **feature branches**: Development branches, links OK for local development
+- **develop** / **feature branches**: Use GitHub Packages by default; local links are only for explicitly directed exception work from the lead architect, or from the user when an AI tool is doing the work
 
 ## Questions?
 

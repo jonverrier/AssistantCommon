@@ -23,4 +23,5 @@
 ## Release Discipline
 - `npm run build` must produce clean `.d.ts` outputs in `dist/`; delete the directory before rebuilding to avoid stale artifacts.
 - Document breaking API shifts in `README.md` and bump versions accordingly so downstream packages can coordinate updates.
-- It's fine to `npm run link-local` during development to test dependents, but **before publishing** run `npm run unlink-local` (and `npm run link-status`) so the release is built solely against GitHub Packages.
+- Default dependent testing to published GitHub Packages: run the normal checks, publish this package, then update dependants to the published version.
+- Use `npm run link-local` only when explicitly directed by the lead architect, or by the user when an AI tool is doing the work; **before publishing, merging, or release validation** run `npm run unlink-local` and confirm `npm run link-status` is clean.
