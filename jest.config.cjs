@@ -19,7 +19,7 @@ module.exports = {
          testMatch: ['**/*.test.ts'],
          transform: tsJestTransform,
          collectCoverageFrom: ['src/**/*.ts', '!src/**/*.d.ts'],
-         testTimeout: 10_000
+         setupFilesAfterEnv: ['<rootDir>/test/setup/jest.timeout.unit.js']
       },
       {
          displayName: 'ci',
@@ -32,7 +32,7 @@ module.exports = {
             '**/dateFormat.test.ts'
          ],
          transform: tsJestTransform,
-         testTimeout: 10_000
+         setupFilesAfterEnv: ['<rootDir>/test/setup/jest.timeout.ci.js']
       }
    ]
 };

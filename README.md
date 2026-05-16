@@ -124,8 +124,17 @@ npm run build
 
 ### Test
 
+Uses **Jest** (`jest.config.cjs`). Assertions use the standalone `expect` package.
+
 ```bash
-npm test
+npm test              # unit project — all test/**/*.test.ts
+npm run test:ci       # ci project — asserts, sanitize, dateFormat only
+```
+
+Run one file:
+
+```bash
+npx jest --selectProjects unit test/[TestFile].test.ts
 ```
 
 ### Coverage

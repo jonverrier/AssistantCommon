@@ -16,7 +16,9 @@
 - Never leak stack traces or raw user data from helpers - sanitize inputs and enforce allowlists for logged fields.
 
 ## Testing & Quality
-- Mocha + `expect` tests must cover every branch of each error/utility, including serialization and sanitization scenarios.
+- **Jest** + `expect` (`jest.config.cjs`, `tsconfig.jest.json`). `describe` / `it` are globals — do not import from `mocha`.
+- `npm test` runs the **unit** project (all `test/**/*.test.ts`); `npm run test:ci` runs the **ci** subset (asserts, sanitize, dateFormat).
+- Tests must cover every branch of each error/utility, including serialization and sanitization scenarios.
 - Add regression tests whenever you modify redaction rules or introduce new logging metadata.
 - Keep coverage high: this repo underpins error handling everywhere, so missing branches quickly become blind spots.
 
