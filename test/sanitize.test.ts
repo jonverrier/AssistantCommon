@@ -7,7 +7,6 @@
 // Copyright (c) 2025, 2026 Jon Verrier
 
 import { expect } from 'expect';
-import { describe, it } from 'mocha';
 import { sanitizeInputString, sanitizeOutputString } from '../src/Sanitize';
 
 describe('sanitizeInputString', () => {
