@@ -6,7 +6,7 @@ Thank you for your interest in contributing to AssistantCommon!
 
 ### Prerequisites
 
-- Node.js 22.x
+- Node.js 24.x
 - npm 10.x or higher
 - Git
 
