@@ -32,7 +32,7 @@
     "clean": "rimraf dist",
     "test": "jest --selectProjects unit",
     "test:ci": "jest --selectProjects ci",
-    "cover": "jest --selectProjects unit --coverage --coverageReporters=html text lcov",
+    "cover": "jest --selectProjects unit --coverage --coverageReporters=html --coverageReporters=text --coverageReporters=lcov",
     "cover:json": "jest --selectProjects unit --coverage --coverageReporters=json --coverageDirectory=.nyc_output"
   },
   "devDependencies": {
